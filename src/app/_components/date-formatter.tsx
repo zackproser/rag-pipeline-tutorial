@@ -6,6 +6,10 @@ interface DateFormatterProps {
 }
 
 export default function DateFormatter({ dateString }: DateFormatterProps) {
+  if (!dateString) {
+    return null;
+  }
+
   try {
     const date = parseISO(dateString);
     

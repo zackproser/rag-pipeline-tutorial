@@ -26,27 +26,48 @@ interface Post {
 }
 
 interface Params {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug);
-  const title = `${post.title} | Next.js Blog Example`;
+  try {
+    const { slug } = await params;
+    const post = await getPostBySlug(slug);
+    
+    if (!post) {
+      return {
+        title: 'Post Not Found',
+      };
+    }
 
-  return {
-    title,
-    openGraph: {
+    const title = `${post.title} | Next.js Blog Example`;
+
+    return {
       title,
-      images: post.ogImage?.url ? [post.ogImage.url] : [],
-    },
-  };
+      openGraph: {
+        title,
+        images: post.ogImage?.url ? [post.ogImage.url] : [],
+      },
+    };
+  } catch (error) {
+    console.error('Error generating metadata:', error);
+    return {
+      title: 'Error Loading Post',
+    };
+  }
 }
 
 export default async function Post({ params }: Params) {
-  const post = await getPostBySlug(params.slug);
-  const content = await markdownToHtml(post.content);
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+  
+  if (!post) {
+    notFound();
+  }
+
+  const content = await markdownToHtml(post.content || '');
 
   return (
     <main>
