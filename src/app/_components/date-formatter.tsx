@@ -13,19 +13,15 @@ export default function DateFormatter({ dateString }: DateFormatterProps) {
   try {
     const date = parseISO(dateString);
     
-    // Use explicit locale and UTC timezone to ensure consistent server/client rendering
     return (
       <time dateTime={dateString}>
         {format(date, "LLLL d, yyyy", {
-          locale: enUS,
-          timeZone: 'UTC'
+          locale: enUS
         })}
       </time>
     );
   } catch (error) {
-    // Log error but don't expose to user
     console.error('Invalid date string:', dateString);
-    // Return ISO date string as fallback
     return <time dateTime={dateString}>{dateString}</time>;
   }
 }
