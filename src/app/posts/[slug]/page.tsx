@@ -46,6 +46,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
 export default async function Post({ params }: Params) {
   const post = await getPostBySlug(params.slug);
+  const content = await markdownToHtml(post.content);
 
   return (
     <main>
@@ -59,7 +60,7 @@ export default async function Post({ params }: Params) {
             date={post.date}
             author={post.author}
           />
-          <PostBody content={post.content} />
+          <PostBody content={content} />
         </article>
       </Container>
     </main>
