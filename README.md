@@ -1,74 +1,95 @@
-# A statically generated blog example using Next.js, Markdown, and TypeScript
+# How to build a RAG pipeline tutorial
 
-This is the existing [blog-starter](https://github.com/vercel/next.js/tree/canary/examples/blog-starter) plus TypeScript.
+![RAG pipeline tutorial](./public/rag-pipeline-tutorial-logo.png)
 
-This example showcases Next.js's [Static Generation](https://nextjs.org/docs/app/building-your-application/routing/layouts-and-templates) feature using Markdown files as the data source.
+<div align="center">
+  <h3>A Next.js blog that understands its own content</h3>
+  <p>Built with Next.js 14, TypeScript, and OpenAI</p>
+</div>
 
-The blog posts are stored in `/_posts` as Markdown files with front matter support. Adding a new Markdown file in there will create a new blog post.
+## 🚀 Overview
 
-To create the blog posts we use [`remark`](https://github.com/remarkjs/remark) and [`remark-html`](https://github.com/remarkjs/remark-html) to convert the Markdown files into an HTML string, and then send it down as a prop to the page. The metadata of every post is handled by [`gray-matter`](https://github.com/jonschlinkert/gray-matter) and also sent in props to the page.
+![example site index page](./public/homepage.webp)
 
-## Demo
+This project demonstrates how to build a modern blog with an AI-powered chat interface that can intelligently discuss your blog content. It's a practical implementation of Retrieval Augmented Generation (RAG) that showcases how to:
 
-[https://next-blog-starter.vercel.app/](https://next-blog-starter.vercel.app/)
+- Create a responsive, modern blog using Next.js and TypeScript
+- Implement a RAG pipeline for intelligent content retrieval
+- Build a real-time chat interface that understands your blog posts
+- Retrieve related entities (posts, products, services, agents, etc) 
+- Augment streaming responses with data serialized in HTTP headers that your React UI can use to update the UI
+- Correctly use the latest AI SDKs from Vercel, Pinecone and OpenAI 
 
-## Deploy your own
+![example site chat page](./public/chat.webp)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/blog-starter)
+The patterns this tutorial demonstrates can be applied to any blog or content site, include e-commerce sites, corporate properties, and more.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/blog-starter&project-name=blog-starter&repository-name=blog-starter)
+This codebase is part of the comprehensive [RAG Pipeline Tutorial](https://zackproser.com/blog/rag-pipeline-tutorial) that walks you through building intelligent content applications.
 
-### Related examples
+## ✨ Features
 
-- [AgilityCMS](/examples/cms-agilitycms)
-- [Builder.io](/examples/cms-builder-io)
-- [ButterCMS](/examples/cms-buttercms)
-- [Contentful](/examples/cms-contentful)
-- [Cosmic](/examples/cms-cosmic)
-- [DatoCMS](/examples/cms-datocms)
-- [DotCMS](/examples/cms-dotcms)
-- [Drupal](/examples/cms-drupal)
-- [Enterspeed](/examples/cms-enterspeed)
-- [Ghost](/examples/cms-ghost)
-- [GraphCMS](/examples/cms-graphcms)
-- [Kontent.ai](/examples/cms-kontent-ai)
-- [MakeSwift](/examples/cms-makeswift)
-- [Payload](/examples/cms-payload)
-- [Plasmic](/examples/cms-plasmic)
-- [Prepr](/examples/cms-prepr)
-- [Prismic](/examples/cms-prismic)
-- [Sanity](/examples/cms-sanity)
-- [Sitecore XM Cloud](/examples/cms-sitecore-xmcloud)
-- [Sitefinity](/examples/cms-sitefinity)
-- [Storyblok](/examples/cms-storyblok)
-- [TakeShape](/examples/cms-takeshape)
-- [Tina](/examples/cms-tina)
-- [Umbraco](/examples/cms-umbraco)
-- [Umbraco heartcore](/examples/cms-umbraco-heartcore)
-- [Webiny](/examples/cms-webiny)
-- [WordPress](/examples/cms-wordpress)
-- [Blog Starter](/examples/blog-starter)
+- **Intelligent Chat Interface**: Chat with an AI that understands your blog content
+- **Real-time Content Updates**: Automatically indexes new blog posts for the RAG pipeline
+- **Modern Stack**: Built with Next.js 14, TypeScript, and Tailwind CSS
+- **Markdown Support**: Write posts in Markdown with front matter
+- **Responsive Design**: Beautiful on all devices
+- **Developer Experience**: Hot reloading, TypeScript types, and more
 
-## How to use
+## 🛠 Quick Start
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+### Prerequisites
 
+Before starting with this application, you must first complete the data preparation steps in the companion Jupyter notebook:
+
+1. Visit the [RAG Pipeline Tutorial Notebook](https://github.com/zackproser/rag-pipeline-tutorial-notebook)
+2. Follow the notebook instructions to prepare your vector store and necessary data
+
+### Installation Steps
+
+1. Clone the repository:
 ```bash
-npx create-next-app --example blog-starter blog-starter-app
+git clone https://github.com/yourusername/blog-starter-app.git
+cd blog-starter-app
 ```
 
+2. Install dependencies:
 ```bash
-yarn create next-app --example blog-starter blog-starter-app
+npm install
 ```
 
+3. Set up your environment variables:
 ```bash
-pnpm create next-app --example blog-starter blog-starter-app
+cp .env.example .env.local
+# Add your OpenAI API key to .env.local
 ```
 
-Your blog should be up and running on [http://localhost:3000](http://localhost:3000)! If it doesn't work, post on [GitHub discussions](https://github.com/vercel/next.js/discussions).
+4. Run the development server:
+```bash
+npm run dev
+```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Visit [http://localhost:3000](http://localhost:3000) to see your blog in action!
 
-# Notes
+## 📚 Documentation
 
-`blog-starter` uses [Tailwind CSS](https://tailwindcss.com) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3).
+For a deep dive into how this works and how to build your own RAG pipeline:
+
+- [Complete RAG Pipeline Tutorial](https://zackproser.com/blog/rag-pipeline-tutorial)
+
+## 📦 Tech Stack
+
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **AI Integration**: OpenAI API
+- **Content**: Markdown with Gray Matter
+- **Styling**: Tailwind CSS
+- **Deployment**: Vercel
+
+## 📝 License
+
+MIT
+
+---
+
+<div align="center">
+  <p>Built with ❤️ as part of the <a href="https://zackproser.com/blog/rag-pipeline-tutorial">RAG Pipeline Tutorial</a></p>
+</div>
