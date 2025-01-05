@@ -19,8 +19,12 @@ if (!process.env.OPENAI_API_KEY || !process.env.PINECONE_API_KEY) {
 export const maxDuration = 300;
 
 export async function POST(req: Request) {
+  console.log("Chat API route hit");
   const { messages } = await req.json();
+  console.log("Messages received:", messages);
+
   const lastMessage = messages[messages.length - 1]
+  console.log("Processing message:", lastMessage.content);
 
   // Get the context from the last message
   const context = await getContext(lastMessage.content, '', 3000, 0.35, false)

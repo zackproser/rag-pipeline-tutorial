@@ -1,11 +1,12 @@
 'use client'
 
 import Link from 'next/link';
-import { useState, Suspense } from 'react';
+import { useState } from 'react';
 import { useChat } from 'ai/react';
 import { clsx } from 'clsx';
 import { ArticleWithSlug } from '@/lib/shared-types';
 import Container from '@/app/_components/container';
+import { Spinner } from '@/app/_components/spinner';
 
 const prepopulatedQuestions = [
   "What are the benefits of WebAssembly?",
@@ -21,12 +22,12 @@ export default function ChatPageClient() {
   const [articles, setArticles] = useState<ArticleWithSlug[]>([]);
 
   const { messages, input, setInput, handleSubmit } = useChat({
+    api: '/api/chat',
     onResponse(response) {
       const sourcesHeader = response.headers.get('x-sources');
       const parsedArticles: ArticleWithSlug[] = sourcesHeader
         ? (JSON.parse(atob(sourcesHeader as string)) as ArticleWithSlug[])
         : [];
-      console.log(`parsedArticles: `, parsedArticles);
       setArticles(parsedArticles);
       setIsLoading(false);
     },
@@ -34,6 +35,12 @@ export default function ChatPageClient() {
       setIsLoading(false);
     }
   });
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsLoading(true);
+    handleSubmit(e);
+  };
 
   const handleSearch = async (query: string) => {
     setInput(query);
@@ -59,14 +66,18 @@ export default function ChatPageClient() {
 
         {/* Search input */}
         <div className="mb-8">
-          <form onSubmit={handleSubmit} className="flex gap-4">
+          <form onSubmit={handleFormSubmit} className="flex gap-4">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ask a question..."
               className="flex-1 p-2 border rounded-md"
             />
-            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md">
+            <button 
+              type="submit" 
+              className="px-4 py-2 bg-blue-500 text-white rounded-md disabled:opacity-50"
+              disabled={isLoading}
+            >
               Send
             </button>
           </form>
@@ -102,6 +113,7 @@ export default function ChatPageClient() {
                 {m.content}
               </div>
             ))}
+            {isLoading && <Spinner />}
           </div>
           <div className="md:w-1/3">
             {articles.length > 0 && (
