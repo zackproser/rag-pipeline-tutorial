@@ -13,10 +13,11 @@
 
 This project demonstrates how to build a modern blog with an AI-powered chat interface that can intelligently discuss your blog content. It's a practical implementation of Retrieval Augmented Generation (RAG) that showcases how to:
 
-- Create a responsive, modern blog using Next.js and TypeScrip
+- Create a responsive, modern blog using Next.js and TypeScript
 - Implement a RAG pipeline for intelligent content retrieval
 - Build a real-time chat interface that understands your blog posts
 - Retrieve related entities (posts, products, services, agents, etc) 
+- Augment streaming responses with data serialized in HTTP headers that your React UI can use to update the UI
 - Correctly use the latest AI SDKs from Vercel, Pinecone and OpenAI 
 
 ![example site chat page](./public/chat.webp)
@@ -42,7 +43,6 @@ Before starting with this application, you must first complete the data preparat
 
 1. Visit the [RAG Pipeline Tutorial Notebook](https://github.com/zackproser/rag-pipeline-tutorial-notebook)
 2. Follow the notebook instructions to prepare your vector store and necessary data
-3. Make sure you have all the generated files and environment variables ready
 
 ### Installation Steps
 
